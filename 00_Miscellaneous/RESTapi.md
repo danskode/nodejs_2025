@@ -1,4 +1,5 @@
-# RESTful API endpoints structure and flow for topic **planets**
+# RESTful API endpoints
+Correct structure and flow for topic **planets**
 
 | HTTP Method | Endpoint        | Description                                                                                                                                                    |
 | ----------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
