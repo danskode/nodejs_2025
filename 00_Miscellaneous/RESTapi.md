@@ -1,3 +1,5 @@
+# RESTful API endpoints structure and flow for topic **planets**
+
 | HTTP Method | Endpoint        | Description                                                                                                                                                    |
 | ----------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **GET**     | `/planets`      | Retrieves a list of all planets. This is the most general endpoint and always comes first, as it deals with collections rather than individual resources.      |
