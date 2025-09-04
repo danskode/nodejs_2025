@@ -29,3 +29,32 @@ Andre sprog har det samme fx Tauri i Rust.
 
 I REPL: tast node i terminalen
 node <filename>
+
+
+
+## Build tools
+Hjælper os med at intereagere med et programmeringssprog
+Eksempler: Maven, Gradle, ant, NuGet, Gem, Rake, CMake, Pip, npm, yarn, pnpm
+
+### Vi bruger npm
+Her er lighederne til javas Maven:
+
+Maven               npm
+=====               =====
+pom.xml             package.json
+
+meta-information    meta-information
+dependencies        dependencies
+life cycles         scripts
+
+**Express** er et web framework til node.js
+
+**node_modules** skal aldrig pushes til github, da det skal hentes af den enkelte udvikler for at matche deres miljø +. det fylder unødigt. Det samme gælder for idea-mapper.
+
+**Servermodellen** request (client) og response (server)
+
+Ved **GET** send altid json retur: {key:"value"}
+
+To måder at sende data via GET requests: Path variabler ":path" og request parametre 
+
+Eksamensspørgsmål: hvor mange argumenter har get-metoden? Svaret er to: endpoint, fx "/" og callback-funtion "(req, res)"
