@@ -7,7 +7,7 @@
 // var skal ikke bruges men const, da det igen kan give scoping issues ...
 // var globalScope = "Never do this!";
 
-// Brug som udgangspunkt const, ellers brug let
+// Brug som udgangspunkt const, ellers brug let, hvis der skal ændres i en ... ()
 // const public = "variable"; virker ikke med strict mode, fordi public er reserveret ord
 // Vi kan ikke reasigne const og vi skal initialize const, når vi deklarerer den
 // We can change values of constant but we cannot reassign it

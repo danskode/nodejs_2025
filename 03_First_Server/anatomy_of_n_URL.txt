@@ -1,0 +1,11 @@
+1) https://www.domain.dk/something?hvad=noget
+2) https://www.domain.dk/something/1 
+
+https://    = protocol
+www.        = subdomain
+domain      = domain
+.dk         = top-level domain
+/something  = endpoint
+?hvad=noget = query parameters
+
+In 2) /1    = path varible (1)

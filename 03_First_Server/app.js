@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+// set up body parsing (til post!) ...
+app.use(express.json());
+
 // route (også kaldet en route handler), der består af to argumenter et endpoint og en callback function
 app.get("/", (req, res) => {
     res.send({
@@ -30,19 +33,16 @@ app.get("/waterfalls/:likingScore", (req, res) => {
     })
 });
 
-
-// Lav et "bag" endpoint, hvor man kan sende to ting i requestet, så man jkan få response: "Min taske indeholder en ... og en  ..."
+// Lav et "taske"-endpoint, hvor man kan sende to ting i requestet, så man jkan få response: "Min taske indeholder en ... og en  ..."
 app.get("/bag/:content1/:content2", (req, res) => {
-
+    
     const content1 = req.params.content1;
     const content2 = req.params.content2;
-
+    
     res.send({
         response: `My bag contains ${content1} and ${content2}`
     });
-
 });
-
 
 //----- noter ------//
 
@@ -54,8 +54,42 @@ app.get("/bag/:content1/:content2", (req, res) => {
 // 3. Vi lytter på en port ...
 //      app.listen(8080);
 
+// vi kan sende variable via get på to måder: path variable og query string
+
+ app.get('/urls', (req,res) => {
+    res.send({
+        data: "some urls"
+    });
+ });
+
+// localhost:8080/urls?lenght=medium&spiciness=6
+
+app.get('/urls', (req,res) => {
+    console.log(req.query);
+    res.send();
+});
+
+// POST ...
+// tre på post: path, query OG body
+// express havde i starten ikke body parsing i frameworket. 
+// Det er inkluderet i dag. Vær obs ved LLM legacy...
+// undefined af body, selv tom body, skyldes at der ikke sker body parsing!
+
+app.post('/subjects', (req, res) => {
+    console.log(req.body);
+    res.send(req.body);
+});
 
 
+// .sendFile() – forventer absolut path ... derfor __dirname
+app.get('/fashionbrands', (req,res) => {
+    res.sendFile( __dirname + "/index.html" );
+})
 
+// Opgave:  lav POST fashion brands
+app.post('/fashionbrands', (req,res) => {
+    res.send(req.body);
+    res.send();
+});
 
 app.listen(8080);
