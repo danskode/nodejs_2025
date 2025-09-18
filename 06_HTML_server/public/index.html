@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Snakes</title>
+    <!-- <link rel="stylesheet" href="./index.css"> -->
+    <style>
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to the world of snakes</h1>
+
+    <p>Numbers of visitors: </p>
+
+    <script>
+        fetch("/visitorcount")
+        .then((response) => response.json())
+        .then((result) => {
+            const visitorCounterH2 = 
+            console.log(result.data);
+        });
+    </script>
+</body>
+</html>

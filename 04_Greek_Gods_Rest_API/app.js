@@ -36,33 +36,72 @@ app.get( '/greekgods/:id', ( req,res ) => {
     }
 } );
 
+let countId = 3;
+let nextId = 3;
+
 app.post('/greekgods', (req,res) =>{
-    res.send(req.body);
+    
+    // id = lav en counter for id for at undgp at tælle listen+1 
+    // hvilket vil give dubletter ved sletning --> se let countId ovenfor
+
+    if(!req.body){
+        return res.status(400).send( {errorMessage: "Requires a JSON body"} ); // hvis fejlen ikke er meget tydelig som 404, så bare brug fejl 400
+    }
+    const newGreekGod = req.body;
+    // newGreekGod.id = ++countId;         // prefix notation (kan ikke gøres i java)
+    newGreekGod.id = nextId++;              // dette er MySQLs --> det kommer senere med databaser ...
+    greekGods.push( newGreekGod );
+
+    return res.send({data:newGreekGod});
 });
 
 app.put('/greekgods/:id', (req,res) => {
     // find god
-    const providedGreekGodsID = Number( req.params.id );
-    const foundGreekGod = greekGods.find( (greekGod) => greekGod.id === providedGreekGodsID );
+    const providedGreekGodId = Number( req.params.id );
+    const foundGreekGod = greekGods.find( (greekGod) => greekGod.id === providedGreekGodId );
     
     if(!foundGreekGod){
-        res.status(404).send( {errorMessage: "No Greek god found with that id"} )
+        return res.status(404).send( {errorMessage: "No Greek god found with that id"} );
     } else {
         // Update god
-        res.send(req.body);
+        return res.send(req.body);
     }
 });
 
-app.delete('/greekgods/:id', (req,res) => {
-    const providedGreekGodsID = Number( req.params.id );
-    const foundGreekGod = greekGods.find( (greekGod) => greekGod.id === providedGreekGodsID );
-    const indexReturned =  greekGods.findIndex( (greekGod) => greekGod.id === providedGreekGodsID );
 
-    if(!foundGreekGod){
-        res.status(404).send( {errorMessage: 'No Greek god found with that id'} );
-    } else {
-        greekGods.splice( indexReturned, 1);
-        res.send(`Greek god ${foundGreekGod.name} is deleted.`);
+
+// mangler patch ...
+app.patch('greekgods/:id', (req,res) => {
+    const providedGreekGodId = Number(req.params.id);
+    const foundGreekGodIndex = greekGods.findIndex( (greekGod) => greekGod.id === providedGreekGodId );
+
+    if(foundGreekGodIndex === -1) {
+        return res.status(404).send( {errorMessage: `Greek God not found by id ${providedGreekGodId}`} );
+    }
+
+    // const newGreekGod = req.body;
+    // newGreekGod.id = foundGreekGod.id;
+    // splice kan merge de to objekter. ens keys, der bruges den sidste i rækken:
+    // husk at sætte id'et igen, så man ikke kan hacke system ved at brugeren kan sende id med!!! 
+    
+    const foundGreekGod = greekGods[foundGreekGodIndex];
+    const newGreekGod = { ...foundGreekGod, ... req.body, id: foundGreekGod.id };
+
+    greekGods[foundGreekGodIndex] = newGreekGod;
+
+    res.send( {data: newGreekGod} );
+} );
+
+app.delete('/greekgods/:id', (req,res) => {
+    const providedGreekGodId = Number( req.params.id );
+    const foundGreekGod = greekGods.find( (greekGod) => greekGod.id === providedGreekGodId );         // for at bruge splice skal vi have index ...
+    const returndGodIndex =  greekGods.findIndex( (greekGod) => greekGod.id === providedGreekGodId );
+
+    if(returndGodIndex === -1){
+        return res.status(404).send( {errorMessage: 'No Greek god found with that id'} );
+    } else {                                                                            // else er valgfri her ...
+        greekGods.splice( returndGodIndex, 1);
+        return res.status(204).send(`Greek god ${foundGreekGod.name} has been deleted.`);
         console.log(greekGods);
     }
 });
@@ -70,4 +109,16 @@ app.delete('/greekgods/:id', (req,res) => {
 // 8080 til backend udvikling HTTP, 9090 til HTTPs
 // 3000 er til frontend udvikling
 // produktionsporte er 80 HTTP og 443 HTTPs
-app.listen(8080);
+
+// app.listen kan tage en callback funktion i andet argument
+// error: er undefined hvis der ingen error er herunder
+// KOnstanter skal skrives med STORT, konvention
+
+const PORT = 8080;
+app.listen(PORT, (error) =>{
+    if (error){
+        console.log("Error starting the server on PORT", PORT, error);
+        return;    
+    }
+    console.log(`Server is running on port ${8080}`);
+});
