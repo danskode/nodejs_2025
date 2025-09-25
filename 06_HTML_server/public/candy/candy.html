@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Candy Page</title>
+  </head>
+  <body>
+    <h1>Welcome to the Candy Page</h1>
+    <p>Here you can find various types of candy.</p>
+    <p id="candyFactory"></p>
+
+    <!-- 
+        Den tradisionelle måde nednfor: Husk rækkefølgen, ellers kan der mangle funktioner længere nede i stacken ...
+        Det er ikke optimalt: circle of dependencies, og ved store programmer kan det være meget tungt 
+        (globalt memory space), og al js lukkes på samme tid 
+        
+        <script src="./charlieAndTheChocolateFactory.js"></script>
+        <script src="./candy.js"></script>
+    -->
+
+    <script src="./candy" type="module"></script>
+  </body>
+</html>
