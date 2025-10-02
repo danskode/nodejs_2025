@@ -6,14 +6,15 @@ const app = express();
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve("public/frontend/index.html"));
+  res.sendFile(path.resolve("public/pages/frontend/index.html"));
 });
 
 app.get("/matches", (req, res) => {
-  res.sendFile(path.resolve("public/frontend/matches/matches.html"));
+  res.sendFile(path.resolve("public/pages/matches/matches.html"));
 });
 
-const PORT = 8080;
+const PORT = Number(process.env.PORT) || 8080;
+
 app.listen(PORT, (error) => {
   if (error) {
     console.log("Server is NOT running");

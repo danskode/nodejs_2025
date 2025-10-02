@@ -4,6 +4,8 @@
   "description": "A Tinder for Indian dogs",
   "main": "app.js",
   "scripts": {
+    "dev": "cross-env PORT=9090 nodemon app.js",
+    "prod": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -13,10 +15,13 @@
     "love",
     "romance"
   ],
-  "author": "",
+  "author": "EK Projects",
   "license": "MIT",
   "type": "module",
   "dependencies": {
     "express": "5.1.0"
+  },
+  "devDependencies": {
+    "cross-env": "10.1.0"
   }
 }
