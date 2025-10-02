@@ -1,3 +1,4 @@
+import { count } from "console";
 import express from "express";
 import path from "path";
 
@@ -17,12 +18,33 @@ app.get("/matches", (req, res) => {
 
 // =================== APIs ============================
 
-// Opgave: Lav et api endpoint der finder fem hunde ...PORT
+// Opgave: Lav et api endpoint der finder fem hunde ...
 
 app.get("/api/dogs", (req, res) => {
-  fetch("https://dog.ceo/api/breeds/image/random/5").then();
+  const dogs = [];
+  let count = 0;
+
+  function getDog() {
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then((res) => res.json())
+      .then((data) => {
+        dogs.push({
+          id: count,
+          imageURL: data.message,
+        });
+        count++;
+        if (count < 5) {
+          getDog();
+        } else {
+          res.send(dogs);
+        }
+      });
+  }
+
+  getDog(); // hent den første hund ...
 });
 
+// Sæt PORT med en miljøvariable og hav et alternativ klar med || ...
 const PORT = Number(process.env.PORT) || 8080;
 
 app.listen(PORT, (error) => {
