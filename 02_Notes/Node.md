@@ -72,4 +72,21 @@ Med || short-circuit, så den tager den første værdi, så "false || null || 5 
 
 Til HTML er acceability vigtigt. Så brug **semantisk HTML**, fx nav.
 
+På vej mod **Server Side Rendering**
+
+**SSR** giver os bedere load time/ressourceforbrug, da vi loader på server og ikke hos clienten. Det giver også bedre SEO.
+
+Med res.send("<h1>hej</h1>") sender man html og med {} så json.
+Importer file system:
+import fs from 'fs';
+const frontpage = fs
+.readFileSync("./public/pages/frontend/index.html")
+.toString();
+
+    Bemærk: `readFileSync` blokkerer, så skal kun bruges lige her. Vi blokkerer her kun ved start af serveren, og ikke hver kang vi fx kalder et endpoint. Derfor skal det også gøres uden for endpoints.
+
+**Rodekassen:**
 Local tunnel: lt --port 8080 -s anders --> giver en url og koden er ip-adressen
+
+**nodemon.json** i roden ved app.js giver mulighed for at tilføje nodemon-specifikke extentions, fx:
+`{ "ext": "js,json,html,css" }`
