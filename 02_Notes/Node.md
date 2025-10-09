@@ -71,3 +71,5 @@ Med || short-circuit, så den tager den første værdi, så "false || null || 5 
 **Hemmelige miljøvariable** skal i en .env-fil som normalt.
 
 Til HTML er acceability vigtigt. Så brug **semantisk HTML**, fx nav.
+
+Local tunnel: lt --port 8080 -s anders --> giver en url og koden er ip-adressen

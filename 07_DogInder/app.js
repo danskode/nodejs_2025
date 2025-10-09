@@ -20,6 +20,13 @@ app.get("/matches", (req, res) => {
 
 // Opgave: Lav et api endpoint der fetcher fem hunde fra et eksternt endpoint ...
 
+import { getMatches } from "./util/matchesUtil.js"; // husk .js!!
+
+app.get("/api/matches", async (req, res) => {
+  const matches = await getMatches();
+  res.send({ data: matches });
+});
+
 app.get("/api/dogs", (req, res) => {
   const dogs = [];
   let count = 0;
