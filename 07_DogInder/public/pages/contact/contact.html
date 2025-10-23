@@ -1,0 +1,18 @@
+<h1>Contact</h1>
+
+
+<form action="/api/contact" method="post">
+    <fieldset>
+        <label for="name">Name:</label>
+        <input type="text" required id="name" name="name" placeholder="Write your name ...">
+
+        <label for="email">Email:</label>
+        <input type="email" required id="email" name="email" placeholder="Email ...">
+            
+        <label for="message">Message:</label>
+        <textarea id="message" required name="message" placeholder="Message ..." rows="15" cols="60"></textarea>
+
+        <input type="submit" value="Submit">
+        <!-- <button>Submit</button>  kan også bruges. Html finder selv ud af at det er submit, når der kun er en i formen !!! -->
+    </fieldset>    
+</form>

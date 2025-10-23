@@ -6,52 +6,64 @@ const app = express();
 
 app.use(express.static("public"));
 
+app.use(express.urlencoded());
+
+import matchesRouter from './routers/matchesRouter.js';
+app.use(matchesRouter);
+import pagesRouter from './routers/pagesRouter.js';         // navnet er samme som filnavnet pga defaul export!!
+app.use(pagesRouter);
+import contactRouter from './routers/contactRouter.js';
+app.use(contactRouter);
+
+
+// alt er nu i routers, derfor udkommenteret ...
+
 // =================== PAGES ======================================
 
-import { frontpagePage, matchesPage } from "./util/pagesUtil.js";
+// import { frontpagePage, matchesPage } from "./util/pagesUtil.js";
 
-app.get("/", (req, res) => {
-  res.send(frontpagePage);
-});
+// app.get("/", (req, res) => {
+//   res.send(frontpagePage);
+// });
 
-app.get("/matches", (req, res) => {
-  res.send(matchesPage);
-});
+// app.get("/matches", (req, res) => {
+//   res.send(matchesPage);
+// });
 
 // =================== APIs ======================================
 
 // Opgave: Lav et api endpoint der fetcher fem hunde fra et eksternt endpoint ...
 
-import { getMatches } from "./util/matchesUtil.js"; // husk .js!!
+// import { getMatches } from "./util/matchesUtil.js"; // husk .js!!
 
-app.get("/api/matches", async (req, res) => {
-  const matches = await getMatches();
-  res.send({ data: matches });
-});
+// app.get("/api/matches", async (req, res) => {
+//   const matches = await getMatches();
+//   res.send({ data: matches });
+// });
 
-app.get("/api/dogs", (req, res) => {
-  const dogs = [];
-  let count = 0;
+// app.get("/api/dogs", (req, res) => {
+//   const dogs = [];
+//   let count = 0;
 
-  function getDog() {
-    fetch("https://dog.ceo/api/breeds/image/random")
-      .then((res) => res.json())
-      .then((data) => {
-        dogs.push({
-          id: count,
-          imageURL: data.message,
-        });
-        count++;
-        if (count < 5) {
-          getDog();
-        } else {
-          res.send(dogs);
-        }
-      });
-  }
+//   function getDog() {
+//     fetch("https://dog.ceo/api/breeds/image/random")
+//       .then((res) => res.json())
+//       .then((data) => {
+//         dogs.push({
+//           id: count,
+//           imageURL: data.message,
+//         });
+//         count++;
+//         if (count < 5) {
+//           getDog();
+//         } else {
+//           res.send(dogs);
+//         }
+//       });
+//   }
 
-  getDog(); // hent den første hund ...
-});
+//   getDog(); // hent den første hund ...
+// });
 
 // =================== PORT & LISTNING ======================================
 
