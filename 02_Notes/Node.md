@@ -90,3 +90,19 @@ Local tunnel: lt --port 8080 -s anders --> giver en url og koden er ip-adressen
 
 **nodemon.json** i roden ved app.js giver mulighed for at tilføje nodemon-specifikke extentions, fx:
 `{ "ext": "js,json,html,css" }`
+
+
+**Svelte web framework**
+
+**Svelte build**
+Bygger til browseren (server).
+Bygger til produktion, så man slipper for en server (frontend).
+Det bliver statisk HTML, CSS og JavaScript.
+
+**Svelte standardændringer**
+- I index.html skift favicon `vite.svg` i `public` og `App.svelte` samt title <tag>
+- `public` folder er til index.html
+- `src/assets` folder er det vi injecter i vores svelte-projekt i øvrigt
+- `src/main.js` er
+– componenter skal være med STORT forbogstav i `src/components/Component.svelte``
+- 
