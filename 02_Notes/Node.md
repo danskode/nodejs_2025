@@ -106,3 +106,9 @@ Det bliver statisk HTML, CSS og JavaScript.
 - `src/main.js` er
 – componenter skal være med STORT forbogstav i `src/components/Component.svelte``
 - 
+
+
+Sende noget fra child til parents (props) op kan kun ske med en funktion i parent, der sendes med handle til on i child component.
+
+Runer $props()
+States - gøt det reaktivt. Kræves når man bruger runer.

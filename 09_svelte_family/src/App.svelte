@@ -1,6 +1,6 @@
 <script>
-  import Home from './components/Home/Home.svelte';
-  import Parent from './components/Parent/Parent.svelte';
+    import Home from './components/Home/Home.svelte';
+    import Parent from './components/Parent/Parent.svelte';
 
   const parents = ["Henning", "Dorthe"];
 
@@ -15,7 +15,6 @@
     },
     {
       name: "Lone",
-      familySheep: "red-sheep",
       isGirl: true
     }
   ]
